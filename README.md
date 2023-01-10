@@ -1,2 +1,2 @@
 # Trabalhos-da-faculdade
- Tranalhos realizados na faculdade
+ Trabalhos realizados na faculdade
