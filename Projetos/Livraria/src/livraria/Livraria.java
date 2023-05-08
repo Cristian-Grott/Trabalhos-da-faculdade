@@ -49,7 +49,7 @@ public class Livraria {
                     System.out.println("             CADASTRO DE LIVROS"); // Cabeçalho
                     System.out.println("------------------------------------------------");
         
-                    //Entrada de dados
+                    //Entrada de dados do livro
                     System.out.print("Digite um código para o livro: ");
                     codigo = input.nextInt();
                     System.out.print("Digite o título do livro: ");
@@ -64,7 +64,7 @@ public class Livraria {
                     System.out.print("Digite o valor do livro: R$");
                     input.nextLine();
                     valorNaoCorrigido = input.nextLine();
-                    valor = Livro.corrigirValor(valorNaoCorrigido); //Método que aceita , e . para ponto flutuante
+                    valor = Livro.corrigirValor(valorNaoCorrigido); //Método que aceita vírgula e ponto como ponto flutuante
                     System.out.print("Digite a quantidade no estoque: ");
                     estoque = input.nextInt();
                     
