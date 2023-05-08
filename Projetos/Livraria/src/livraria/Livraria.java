@@ -84,7 +84,7 @@ public class Livraria {
                     break;
                     
                 case 2: // Listar todos os livros cadastrados
-                    Livro.listarLivros(livros);
+                    Livro.listarLivros(livros); // Método que lista todos os livros cadastrados
                     
                     System.out.println("************************************************");
                     // Uma entrada de dados para não voltar automaticamente ao menú principal
