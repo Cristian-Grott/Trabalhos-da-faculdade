@@ -38,6 +38,8 @@ public class Livraria {
             System.out.println("[5] Buscar livros por preço");
             System.out.println("[6] Busca por quantidade em estoque");
             System.out.println("[7] Valor total em estoque");
+            System.out.println("[8] Importar livros a partir do TXT");
+            System.out.println("[9] Gravar os livros no TXT");
             System.out.println("[0] Encerrar atividades");
             op = input.nextInt();
             
@@ -191,6 +193,12 @@ public class Livraria {
                     input.nextLine();
         
                     System.out.println("================================================");
+                    break;
+                
+                case 8: // Carregar arquivos a partir de um TXT
+                    break;
+                    
+                case 9: // Gravar as modificações feitas
                     break;
                     
                 case 0:
