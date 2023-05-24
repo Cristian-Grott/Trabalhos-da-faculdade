@@ -1,6 +1,8 @@
 package livraria;
 
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,11 +10,14 @@ public class Livraria {
 
     public static void main (String[] args) throws Exception{
         
-        FileInputStream arquivo = new FileInputStream("src\\livraria\\Livros.txt"); //Intanciamento do objeto arquivo trazendo o TXT Livros
-        Scanner inputArquivo = new Scanner(arquivo); // Scanner para a entrada de dados pelo objeto arquivo
+//        FileInputStream arquivoLeitura = new FileInputStream("src\\livraria\\Livros.txt"); //Intanciamento do objeto arquivoLeitura trazendo o TXT Livros
+  //      Scanner inputArquivo = new Scanner(arquivoLeitura); // Scanner para a entrada de dados pelo objeto arquivo
+        
+        
         Scanner input = new Scanner(System.in); // Scanner para entrada de dados manuais
         ArrayList <Livro> livros = new ArrayList(); // ArrayList de livros
         Livro L1;
+        
         
         String linha; //String que recebe a linha do arquivo importado
         String SL[]; // Vetor que recebe as informações de uma linha do arquivo
@@ -20,14 +25,7 @@ public class Livraria {
         String titulo, editora, categoria, valorNaoCorrigido;//Variáveis para armazenar informações dos livros
         float valor;
         int op, sair; // Variável de controle do menú principal
-
-         // Cadastrando livros no ArrayList através do arquivo importado
-        while(inputArquivo.hasNextLine()){
-            linha = inputArquivo.nextLine(); // Recebe uma String com o valor de uma linha do arquivo
-            SL = linha.split(", "); // Retira as virgulas da linha e separa como dados diferentes em um vetor
-            L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]), Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
-            Livro.cadastrarLivro(livros, L1);
-        }
+        
         
         do{ // Laço para repetir o menú enquanto o usuário não quiser sair do programa
             System.out.println("Escolha uma das opções abaixo:");
@@ -196,9 +194,31 @@ public class Livraria {
                     break;
                 
                 case 8: // Carregar arquivos a partir de um TXT
+/*                    while(inputArquivo.hasNextLine()){
+                        linha = inputArquivo.nextLine(); // Recebe uma String com o valor de uma linha do arquivo
+                        SL = linha.split(", "); // Retira as virgulas da linha e separa como dados diferentes em um vetor
+                        L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]), Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
+                        Livro.cadastrarLivro(livros, L1);
+                    }
+                    
+                    // Uma entrada de dados para não voltar automaticamente ao menú principal
+                    System.out.println("LIVROS IMPORTADOS COM SUCESSO");
+                    System.out.println("************************************************");
+                    System.out.print("Aperte ENTER para continuar.");
+                    input.nextLine();
+                    input.nextLine();
+        
+                    System.out.println("================================================"); */
                     break;
                     
                 case 9: // Gravar as modificações feitas
+                    FileWriter arquivoEscrita = new FileWriter("src\\livraria\\Livros.txt"); //Instanciamento do objeto arquivoEscrito trazendo o TXT Livros
+                    PrintWriter outputArquivo = new PrintWriter(arquivoEscrita); // Objeto que imprime no TXT as informações do programa
+                    
+                    for (Livro livro : livros) {
+                        outputArquivo.println(livro.getCodigo() + ", " + livro.getTitulo() + ", " + livro.getEditora() + ", "
+                        + livro.getCategoria() + ", " + livro.getAno() + ", " + livro.getValor() + ", " + livro.getEstoque());
+                    }
                     break;
                     
                 case 0:
