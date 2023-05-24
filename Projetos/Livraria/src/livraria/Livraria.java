@@ -10,8 +10,8 @@ public class Livraria {
 
     public static void main (String[] args) throws Exception{
         
-//        FileInputStream arquivoLeitura = new FileInputStream("src\\livraria\\Livros.txt"); //Intanciamento do objeto arquivoLeitura trazendo o TXT Livros
-  //      Scanner inputArquivo = new Scanner(arquivoLeitura); // Scanner para a entrada de dados pelo objeto arquivo
+        FileInputStream arquivoLeitura = new FileInputStream("src\\livraria\\Livros.txt"); //Intanciamento do objeto arquivoLeitura trazendo o TXT Livros
+        Scanner inputArquivo = new Scanner(arquivoLeitura); // Scanner para a entrada de dados pelo objeto arquivo
         
         
         Scanner input = new Scanner(System.in); // Scanner para entrada de dados manuais
@@ -194,7 +194,7 @@ public class Livraria {
                     break;
                 
                 case 8: // Carregar arquivos a partir de um TXT
-/*                    while(inputArquivo.hasNextLine()){
+                    while(inputArquivo.hasNextLine()){
                         linha = inputArquivo.nextLine(); // Recebe uma String com o valor de uma linha do arquivo
                         SL = linha.split(", "); // Retira as virgulas da linha e separa como dados diferentes em um vetor
                         L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]), Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
@@ -208,7 +208,7 @@ public class Livraria {
                     input.nextLine();
                     input.nextLine();
         
-                    System.out.println("================================================"); */
+                    System.out.println("================================================");
                     break;
                     
                 case 9: // Gravar as modificações feitas
@@ -219,6 +219,8 @@ public class Livraria {
                         outputArquivo.println(livro.getCodigo() + ", " + livro.getTitulo() + ", " + livro.getEditora() + ", "
                         + livro.getCategoria() + ", " + livro.getAno() + ", " + livro.getValor() + ", " + livro.getEstoque());
                     }
+                    
+                    outputArquivo.close();
                     break;
                     
                 case 0:

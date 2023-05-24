@@ -1,7 +1,7 @@
-1, Feliz Ano Velho, Brasiliense, Autobiografia, 1982, 35.90, 10
-2, A menina quebrada, Arquipélago, Jornalismo literário, 2013, 72.00, 5
+1, Feliz Ano Velho, Brasiliense, Autobiografia, 1982, 35.9, 10
+2, A menina quebrada, Arquipélago, Jornalismo literário, 2013, 72.0, 5
 3, One Piece, Panini, Mangá, 2023, 33.82, 7
-4, Coração de tinta, Seguinte, Romance, 2006, 44.00, 10
+4, Coração de tinta, Seguinte, Romance, 2006, 44.0, 10
 5, Sangue de tinta, Seguinte, Romance, 2009, 46.32, 11
 6, Morte de tinta, Seguinte, Romance, 2010, 48.99, 7
 7, Quarto de despejo, Ática, Diário, 2019, 44.81, 17
