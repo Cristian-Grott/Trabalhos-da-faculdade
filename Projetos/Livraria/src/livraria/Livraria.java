@@ -219,15 +219,21 @@ public class Livraria {
                         outputArquivo.println(livro.getCodigo() + ", " + livro.getTitulo() + ", " + livro.getEditora() + ", "
                         + livro.getCategoria() + ", " + livro.getAno() + ", " + livro.getValor() + ", " + livro.getEstoque());
                     }
-                    
                     outputArquivo.close();
+                    
+                    // Uma entrada de dados para não voltar automaticamente ao menú principal
+                    System.out.println("LIVROS GRAVADOS COM SUCESSO");
+                    System.out.println("************************************************");
+                    System.out.print("Aperte ENTER para continuar.");
+                    input.nextLine();
+                    input.nextLine();
+        
+                    System.out.println("================================================");
                     break;
                     
                 case 0:
                     
                     do{
-                        System.out.println("Esse programa não tem um banco de dados.");
-                        System.out.println("Caso você saia, todas as informações serão perdidas.");
                         System.out.println("Você tem certeza que quer sair?");
                         System.out.println("[1] SIM");
                         System.out.println("[2] NÃO");
