@@ -197,7 +197,8 @@ public class Livraria {
                     while(inputArquivo.hasNextLine()){
                         linha = inputArquivo.nextLine(); // Recebe uma String com o valor de uma linha do arquivo
                         SL = linha.split(", "); // Retira as virgulas da linha e separa como dados diferentes em um vetor
-                        L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]), Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
+                        L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]),
+                                        Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
                         Livro.cadastrarLivro(livros, L1);
                     }
                     
