@@ -1,8 +1,5 @@
 package livraria;
 
-import java.io.FileInputStream;
-import java.io.PrintWriter;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,8 +7,7 @@ public class Livraria {
 
     public static void main (String[] args) throws Exception{
         
-        FileInputStream arquivoLeitura = new FileInputStream("src\\livraria\\Livros.txt"); //Intanciamento do objeto arquivoLeitura trazendo o TXT Livros
-        Scanner inputArquivo = new Scanner(arquivoLeitura); // Scanner para a entrada de dados pelo objeto arquivo
+        
         
         
         Scanner input = new Scanner(System.in); // Scanner para entrada de dados manuais
@@ -19,8 +15,6 @@ public class Livraria {
         Livro L1;
         
         
-        String linha; //String que recebe a linha do arquivo importado
-        String SL[]; // Vetor que recebe as informações de uma linha do arquivo
         int codigo, ano, estoque; //Variáveis para armazenar informações dos livros
         String titulo, editora, categoria, valorNaoCorrigido;//Variáveis para armazenar informações dos livros
         float valor;
@@ -36,8 +30,8 @@ public class Livraria {
             System.out.println("[5] Buscar livros por preço");
             System.out.println("[6] Busca por quantidade em estoque");
             System.out.println("[7] Valor total em estoque");
-            System.out.println("[8] Importar livros a partir do TXT");
-            System.out.println("[9] Gravar os livros no TXT");
+            System.out.println("[8] Carregar estoque");
+            System.out.println("[9] Atualizar arquivo de estoque");
             System.out.println("[0] Encerrar atividades");
             op = input.nextInt();
             
@@ -194,16 +188,8 @@ public class Livraria {
                     break;
                 
                 case 8: // Carregar arquivos a partir de um TXT
-                    while(inputArquivo.hasNextLine()){
-                        linha = inputArquivo.nextLine(); // Recebe uma String com o valor de uma linha do arquivo
-                        SL = linha.split(", "); // Retira as virgulas da linha e separa como dados diferentes em um vetor
-                        L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]),
-                                        Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
-                        Livro.cadastrarLivro(livros, L1);
-                    }
+                	Livro.carregarEstoque(livros); // Método que carrega o estoque a partir do TXT
                     
-                    // Uma entrada de dados para não voltar automaticamente ao menú principal
-                    System.out.println("LIVROS IMPORTADOS COM SUCESSO");
                     System.out.println("************************************************");
                     System.out.print("Aperte ENTER para continuar.");
                     input.nextLine();
@@ -213,17 +199,8 @@ public class Livraria {
                     break;
                     
                 case 9: // Gravar as modificações feitas
-                    FileWriter arquivoEscrita = new FileWriter("src\\livraria\\Livros.txt"); //Instanciamento do objeto arquivoEscrito trazendo o TXT Livros
-                    PrintWriter outputArquivo = new PrintWriter(arquivoEscrita); // Objeto que imprime no TXT as informações do programa
-                    
-                    for (Livro livro : livros) {
-                        outputArquivo.println(livro.getCodigo() + ", " + livro.getTitulo() + ", " + livro.getEditora() + ", "
-                        + livro.getCategoria() + ", " + livro.getAno() + ", " + livro.getValor() + ", " + livro.getEstoque());
-                    }
-                    outputArquivo.close();
-                    
-                    // Uma entrada de dados para não voltar automaticamente ao menú principal
-                    System.out.println("LIVROS GRAVADOS COM SUCESSO");
+                    Livro.gravarLivros(livros);
+                	
                     System.out.println("************************************************");
                     System.out.print("Aperte ENTER para continuar.");
                     input.nextLine();
@@ -235,7 +212,7 @@ public class Livraria {
                 case 0:
                     
                     do{
-                        System.out.println("Você tem certeza que quer sair?");
+                        System.out.println("Você quer gravar os registros para não perdê-los?");
                         System.out.println("[1] SIM");
                         System.out.println("[2] NÃO");
                         sair = input.nextInt();
@@ -244,12 +221,13 @@ public class Livraria {
                             System.out.println("OPÇÃO INVÁLIDA!");
                         }
             
-                        if(sair==2){
-                            op=-1;
-                        }else{
-                            System.out.println("------------------------------------------------");
-                            System.out.println("              PROGRAMA ENCERRADO");
+                        if(sair==1){
+                        	Livro.gravarLivros(livros);
                         }
+                        
+                        System.out.println("------------------------------------------------");
+                        System.out.println("              PROGRAMA ENCERRADO");
+                        
                     }while(sair<1 || sair>2);
         
                     System.out.println("================================================");
