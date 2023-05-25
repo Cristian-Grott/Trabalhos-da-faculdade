@@ -1,6 +1,13 @@
 package livraria;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.text.Normalizer;
 
 public class Livro {
     
@@ -112,11 +119,13 @@ public class Livro {
     
     public static void buscarLivroPorNome(ArrayList<Livro> livros, String titulo){ //Método, o qual busca as informações de um livro através de seu nome ou parte do seu nome
         boolean temLivros = false;
+        String tituloSemAcentos = Normalizer.normalize(titulo, Normalizer.Form.NFD);
         
         for (Livro livro : livros) { // Laço que percorre todo o ArrayList Livros
-            
+        	
+        	String tituloVerificadoSemAcento = Normalizer.normalize(livro.getTitulo(), Normalizer.Form.NFD);
             // Condição que verifica se a informação buscada está no titulo livro
-            if(livro.getTitulo().toLowerCase().contains(titulo.toLowerCase())){
+            if(tituloVerificadoSemAcento.toLowerCase().contains(tituloSemAcentos.toLowerCase())){
                 temLivros = true;
                 livro.info(); // Impressão das informações dos livros que condizem à busca
                 System.out.println("------------------------------------------------");
@@ -200,6 +209,49 @@ public class Livro {
         }
         
         return Float.parseFloat(valor);
+    }
+    
+    public static void carregarEstoque(ArrayList <Livro> livros) throws FileNotFoundException {
+    	Livro L1;
+    	FileInputStream arquivoLeitura = new FileInputStream("src\\livraria\\Livros.txt"); //Intanciamento do objeto arquivoLeitura trazendo o TXT Livros
+        Scanner inputArquivo = new Scanner(arquivoLeitura); // Scanner para a entrada de dados pelo objeto arquivo
+    	
+    	String linha; //String que recebe a linha do arquivo importado
+        String SL[]; // Vetor que recebe as informações de uma linha do arquivo
+    	
+    	while(inputArquivo.hasNextLine()){
+            linha = inputArquivo.nextLine(); // Recebe uma String com o valor de uma linha do arquivo
+            SL = linha.split(", "); // Retira as virgulas da linha e separa como dados diferentes em um vetor
+            L1 = new Livro(Integer.parseInt(SL[0]), SL[1], SL[2], SL[3], Integer.parseInt(SL[4]),
+                            Float.parseFloat(SL[5]), Integer.parseInt(SL[6]));
+            Livro.cadastrarLivro(livros, L1);
+        }
+        
+        // Uma entrada de dados para não voltar automaticamente ao menú principal
+        System.out.println("LIVROS IMPORTADOS COM SUCESSO");
+    }
+    
+    public static void gravarLivros(ArrayList<Livro> livros) throws IOException{ // Método, o qual imprime as informações dos livros cadastrados no TXT
+        boolean temLivros = false;
+    		
+        if(!livros.isEmpty()){
+        	FileWriter arquivoEscrita = new FileWriter("src\\livraria\\Livros.txt"); //Instanciamento do objeto arquivoEscrito trazendo o TXT Livros
+        	PrintWriter outputArquivo = new PrintWriter(arquivoEscrita); // Objeto que imprime no TXT as informações do programa
+        	
+        	temLivros = true;
+        	for (Livro livro : livros) {
+        		outputArquivo.println(livro.getCodigo() + ", " + livro.getTitulo() + ", " + livro.getEditora() + ", "
+        				+ livro.getCategoria() + ", " + livro.getAno() + ", " + livro.getValor() + ", " + livro.getEstoque());
+        	}
+            
+        	outputArquivo.close();
+        }
+        
+        
+        if(!temLivros){
+            System.out.println("NENHUM LIVRO ENCONTRADO NA BUSCA");
+        }
+
     }
     
 }
